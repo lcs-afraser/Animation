@@ -4,8 +4,8 @@
  
  Set the size of your desired canvas by adjusting the constants on lines 19 and 20.
  */
-let preferredWidth = 600
-let preferredHeight = 600
+let preferredWidth = 1200
+let preferredHeight = 1200
 /*:
  ## Required code
  
@@ -23,6 +23,9 @@ let canvas = Canvas(width: preferredWidth, height: preferredHeight)
 // Create a turtle that will draw upon the canvas
 let turtle = Tortoise(drawingUpon: canvas)
 
+// Create a pen to draw on the canvas
+let p = Pen(drawingUpon: canvas)
+
 // Show the canvas in the playground's live view
 PlaygroundPage.current.liveView = canvas
 /*:
@@ -35,9 +38,38 @@ PlaygroundPage.current.liveView = canvas
  [Documentation](http://russellgordon.ca/CanvasGraphics/Documentation/) is available.
 
  */
+//Move origin to middle
+canvas.translate(to: Point(x: canvas.width / 2,
+                           y: canvas.height / 2))
 
-// Replace this comment with your first comment – what is the goal of the code you're about to write?
-canvas.drawRectangle(at: Point(x: 50, y: 75), width: 100, height: 200)
+//Draw a grid
+canvas.drawAxes(withScale: true,
+                by: 20,
+                color: Color.black)
+
+// Middle
+p.goto(dx: -100, dy: 0)
+p.drawTo(dx: 100, dy: 200)
+p.drawTo(dx: -50, dy: 100)
+p.goto(dx: 50, dy: -100)
+p.drawTo(dx: 100, dy: -200)
+p.drawTo(dx: -200, dy: 0)
+p.drawTo(dx: 300, dy: 0)
+p.goto(dx: -300, dy: 0)
+// Inner Layer
+p.goto(dx: 50, dy: 300)
+p.drawTo(dx: -160, dy: -300)
+p.drawTo(dx: 0, dy: -500)
+p.goto(dx: -20, dy: 0)
+p.drawTo(dx: 0, dy: 500)
+p.drawTo(dx: 180, dy: 340)
+p.drawTo(dx: 180, dy: -340)
+
+// Where am I?
+print(p.currentHeading)
+print(p.currentPosition())
+
+
 
 /*:
  ## Show the Live View
